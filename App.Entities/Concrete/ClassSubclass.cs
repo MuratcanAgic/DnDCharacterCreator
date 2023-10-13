@@ -1,8 +1,9 @@
-﻿using App.Entities.Abstract;
+﻿using App.Core.Entities;
+using App.Entities.Abstract;
 
 namespace App.Entities.Concrete
 {
-  public class ClassSubclass : BaseEntitiy
+  public class ClassSubclass : BaseEntitiy, IEntity
   {
     public int ClassId { get; set; }
     public int SubclassId { get; set; }

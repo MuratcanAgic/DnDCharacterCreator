@@ -2,6 +2,7 @@
 using App.Entities.Abstract;
 namespace App.Entities.Concrete
 {
+
   public class Ability : BaseEntitiy, IEntity
   {
     public int Strength { get; set; }
@@ -11,7 +12,7 @@ namespace App.Entities.Concrete
     public int Wisdom { get; set; }
     public int Charisma { get; set; }
 
-    public int CharacterId { get; set; }
-    public Character Character { get; set; }
+    /*public int CharacterId { get; set; }
+    public Character Character { get; set; }*/
   }
 }
