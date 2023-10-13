@@ -1,5 +1,8 @@
 ﻿using App.Business.Abstract;
 using App.Business.Constants;
+using App.Business.ValidationRules.FluentValidation;
+using App.Core.Aspect.Autofac.Validation;
+using App.Core.Utilities.Business;
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
@@ -16,11 +19,16 @@ namespace App.Business.Concrete
       _abilityDal = abilityDal;
     }
 
+    [ValidationAspect(typeof(AbilityValidator))]
     public IResult Add(Ability entity)
     {
-      if (entity == null)
-        return new ErrorResult("Ability empty");
 
+      IResult result = BusinessRules.Run(); //this will run business rules defined in this classs
+
+      if (result != null)
+      {
+        return result;
+      }
       _abilityDal.Add(entity);
       return new SuccessResult(Messages.AbilityAdded);
     }
