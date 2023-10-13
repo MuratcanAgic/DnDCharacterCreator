@@ -10,17 +10,16 @@ namespace App.DataAccess.EntityConfigurations
     {
       builder.HasKey(x => x.Id);
       builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
-      builder.Property(x => x.CharacterLevel).IsRequired();
+      builder.Property(x => x.CharacterLevel).IsRequired().HasDefaultValue(1);
+      /*  builder
+          .HasOne<Ability>(a => a.Ability)
+          .WithOne(cr => cr.Character)
+          .HasForeignKey<Ability>(a => a.CharacterId);
 
-      builder
-        .HasOne<Ability>(a => a.Ability)
-        .WithOne(cr => cr.Character)
-        .HasForeignKey<Ability>(a => a.CharacterId);
-
-      builder
-        .HasOne<Race>(r => r.Race)
-        .WithOne(cr => cr.Character)
-        .HasForeignKey<Race>(a => a.CharacterId);
+        builder
+          .HasOne<Race>(r => r.Race)
+          .WithOne(cr => cr.Character)
+          .HasForeignKey<Race>(a => a.CharacterId);*/
     }
   }
 }

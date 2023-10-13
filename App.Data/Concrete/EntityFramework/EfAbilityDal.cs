@@ -7,6 +7,10 @@ namespace App.DataAccess.Concrete.EntityFramework
 {
   public class EfAbilityDal : EfEntityRepositoryBase<Ability, DatabaseContext>, IAbilityDal
   {
-
+    private DatabaseContext _dbContext;
+    public EfAbilityDal(DatabaseContext context) : base(context)
+    {
+      _dbContext = context;
+    }
   }
 }

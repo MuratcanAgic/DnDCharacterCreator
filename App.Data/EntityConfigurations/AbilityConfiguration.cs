@@ -9,6 +9,14 @@ namespace App.DataAccess.EntityConfigurations
     public void Configure(EntityTypeBuilder<Ability> builder)
     {
       builder.HasKey(x => x.Id);
+
+      builder.Property(x => x.Dexterity).IsRequired().HasDefaultValue(1);
+      builder.Property(x => x.Constitution).IsRequired().HasDefaultValue(1);
+      builder.Property(x => x.Wisdom).IsRequired().HasDefaultValue(1);
+      builder.Property(x => x.Strength).IsRequired().HasDefaultValue(1);
+      builder.Property(x => x.Charisma).IsRequired().HasDefaultValue(1);
+      builder.Property(x => x.Intelligence).IsRequired().HasDefaultValue(1);
+
     }
   }
 }

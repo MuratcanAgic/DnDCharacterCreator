@@ -10,7 +10,7 @@ namespace App.DataAccess.EntityConfigurations
     {
       builder.HasKey(x => x.Id);
 
-      builder
+      /*builder
         .HasOne<Character>(cr => cr.Character)
         .WithMany(cc => cc.CharacterClasses)
         .HasForeignKey(x => x.CharacterId);
@@ -18,7 +18,7 @@ namespace App.DataAccess.EntityConfigurations
       builder
         .HasOne<Class>(cr => cr.Class)
         .WithMany(cc => cc.CharacterClasses)
-        .HasForeignKey(x => x.ClassId);
+        .HasForeignKey(x => x.ClassId);*/
     }
   }
 }

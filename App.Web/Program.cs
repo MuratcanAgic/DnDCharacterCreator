@@ -1,3 +1,4 @@
+using App.Business;
 using App.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataServices(builder.Configuration);
+builder.Services.AddBusinessServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using App.DataAccess.Context;
+﻿using App.DataAccess.Abstract;
+using App.DataAccess.Concrete.EntityFramework;
+using App.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +13,8 @@ namespace App.DataAccess
     {
       services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-      //services.AddTransient<ICategoryRepository, CategoryRepository>();
-
-
+      services.AddTransient<IAbilityDal, EfAbilityDal>();
+      //services.AddTransient<DbContext, DatabaseContext>();
       return services;
     }
   }

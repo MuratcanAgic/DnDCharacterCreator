@@ -6,8 +6,7 @@ namespace App.Core.DataAccess.Abstract
   {
     T FindById(int id);
     T Get(Expression<Func<T, bool>> filter, string includeProperties = "");
-    IEnumerable<T> GetList(Expression<Func<T, bool>> filter = null,
-    Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
+    IEnumerable<T> GetList(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
     void Add(T entity);
     void Update(T entity);
     void Delete(T entity);

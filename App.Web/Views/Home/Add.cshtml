@@ -1,0 +1,77 @@
+﻿@model App.Entities.Concrete.Ability
+
+<div class="container">
+
+  <div class="row mb-2">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Ürün Oluştur</h5>
+          @*<div asp-validation-summary="All"></div>*@
+        </div>
+        <div class="card-body">
+          <form asp-controller="Home" asp-action="Add" method="post" class="d-flex align-items-center">
+            <div class="container">
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Dexterity" class="mb-2"></label>
+                  <input type="text" asp-for="Dexterity" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Dexterity" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Strength" class="mb-2"></label>
+                  <input type="text" asp-for="Strength" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Strength" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Intelligence" class="mb-2"></label>
+                  <input type="text" asp-for="Intelligence" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Intelligence" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Wisdom" class="mb-2"></label>
+                  <input type="text" asp-for="Wisdom" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Wisdom" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Charisma" class="mb-2"></label>
+                  <input type="text" asp-for="Charisma" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Charisma" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="Constitution" class="mb-2"></label>
+                  <input type="text" asp-for="Constitution" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="Constitution" class="text-danger"></span>
+                </div>
+              </div>
+            @*   <div class="row mb-4">
+                <div class="col">
+                  <label asp-for="CharacterId" class="mb-2"></label>
+                  <input type="text" asp-for="CharacterId" class="form-control" placeholder="Ad" />
+                  <span asp-validation-for="CharacterId" class="text-danger"></span>
+                </div>
+              </div> *@
+              <div class="row mb-2">
+                <div class="col">
+                  <button type="submit" class="btn btn-warning" style="width:150px">Oluştur</button>
+                  <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="width:150px">Listeye Dön</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

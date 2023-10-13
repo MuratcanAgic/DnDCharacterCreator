@@ -7,5 +7,10 @@ namespace App.DataAccess.Concrete.EntityFramework
 {
   public class EfCharacterDal : EfEntityRepositoryBase<Character, DatabaseContext>, ICharacterDal
   {
+    private DatabaseContext _dbContext;
+    public EfCharacterDal(DatabaseContext context) : base(context)
+    {
+      _dbContext = context;
+    }
   }
 }
