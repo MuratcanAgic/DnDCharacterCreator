@@ -2,6 +2,8 @@
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Concrete
@@ -10,13 +12,18 @@ namespace App.Business.Concrete
   public class RaceManager : IRaceService
   {
     IRaceDal _raceDal;
-
-    public RaceManager(IRaceDal raceDal)
+    IValidator<Race> _validator;
+    public RaceManager(IRaceDal raceDal, IValidator<Race> validator)
     {
       _raceDal = raceDal;
+      _validator = validator;
+    }
+    public ValidationResult Validate(Race entity)
+    {
+      return _validator.Validate(entity);
     }
 
-    public IResult Add(Race entity)
+    public IDataResult<Race> Add(Race entity)
     {
       throw new NotImplementedException();
     }

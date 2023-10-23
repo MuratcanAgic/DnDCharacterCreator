@@ -2,6 +2,8 @@
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Concrete
@@ -9,13 +11,18 @@ namespace App.Business.Concrete
   public class SubclassManager : IsubClassService
   {
     ISubclassDal _subclassDal;
-
-    public SubclassManager(ISubclassDal subclassDal)
+    IValidator<Subclass> _validator;
+    public SubclassManager(ISubclassDal subclassDal, IValidator<Subclass> validator)
     {
       _subclassDal = subclassDal;
+      _validator = validator;
+    }
+    public ValidationResult Validate(Subclass entity)
+    {
+      return _validator.Validate(entity);
     }
 
-    public IResult Add(Subclass entity)
+    public IDataResult<Subclass> Add(Subclass entity)
     {
       throw new NotImplementedException();
     }

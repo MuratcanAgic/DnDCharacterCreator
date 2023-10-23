@@ -2,6 +2,8 @@
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Concrete
@@ -9,13 +11,17 @@ namespace App.Business.Concrete
   public class CharacterManager : ICharacterService
   {
     ICharacterDal _characterDal;
-
-    public CharacterManager(ICharacterDal characterDal)
+    IValidator<Character> _validator;
+    public CharacterManager(ICharacterDal characterDal, IValidator<Character> validator)
     {
       _characterDal = characterDal;
+      _validator = validator;
     }
-
-    public IResult Add(Character entity)
+    public ValidationResult Validate(Character entity)
+    {
+      return _validator.Validate(entity);
+    }
+    public IDataResult<Character> Add(Character entity)
     {
       throw new NotImplementedException();
     }

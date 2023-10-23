@@ -1,11 +1,14 @@
 ﻿using App.Core.Entities;
 using App.Entities.Abstract;
+using System.ComponentModel;
+
 namespace App.Entities.Concrete
 {
 
   public class Ability : BaseEntitiy, IEntity
   {
     public int Strength { get; set; }
+    [DisplayName("Çeviklik")]
     public int Dexterity { get; set; }
     public int Constitution { get; set; }
     public int Intelligence { get; set; }

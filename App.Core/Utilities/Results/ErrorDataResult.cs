@@ -1,4 +1,6 @@
-﻿namespace App.Core.Utilities.Results
+﻿
+
+namespace App.Core.Utilities.Results
 {
   public class ErrorDataResult<T> : DataResult<T>
   {
@@ -21,5 +23,6 @@
     {
 
     }
+
   }
 }

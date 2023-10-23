@@ -2,6 +2,8 @@
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Concrete
@@ -9,13 +11,17 @@ namespace App.Business.Concrete
   public class ClassManager : IClassService
   {
     IClassDal _classDal;
-
-    public ClassManager(IClassDal classDal)
+    IValidator<Class> _validator;
+    public ClassManager(IClassDal classDal, IValidator<Class> validator)
     {
       _classDal = classDal;
+      _validator = validator;
     }
-
-    public IResult Add(Class entity)
+    public ValidationResult Validate(Class entity)
+    {
+      return _validator.Validate(entity);
+    }
+    public IDataResult<Class> Add(Class entity)
     {
       throw new NotImplementedException();
     }
@@ -94,5 +100,7 @@ namespace App.Business.Concrete
     {
       throw new NotImplementedException();
     }
+
+
   }
 }

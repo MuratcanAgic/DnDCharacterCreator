@@ -1,4 +1,5 @@
 ﻿using App.Business.Abstract;
+using App.Core.Utilities.Extensions;
 using App.Entities.Concrete;
 using App.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -34,12 +35,24 @@ namespace App.Web.Controllers
     [HttpPost, ActionName("Add")]
     public IActionResult AddAbility(Ability ability)
     {
-      if (ability != null)
+      if (ability == null)
       {
-        _abiltiyService.Add(ability);
-        _abiltiyService.Save();
+        return RedirectToAction("Index");
       }
 
+      var validationResult = _abiltiyService.Validate(ability);
+      if (validationResult.IsValid == false)
+      {
+        validationResult.AddToModelState(ModelState);
+        return View(ability);
+      }
+
+      var result = _abiltiyService.Add(ability);
+      if (result.Success == false)
+      {
+        return RedirectToAction("Index");
+      }
+      _abiltiyService.Save();
       return RedirectToAction("Index");
     }
 

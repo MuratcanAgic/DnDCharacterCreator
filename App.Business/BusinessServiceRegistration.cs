@@ -1,5 +1,8 @@
 ﻿using App.Business.Abstract;
 using App.Business.Concrete;
+using App.Business.ValidationRules.FluentValidation;
+using App.Entities.Concrete;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Business
@@ -8,10 +11,10 @@ namespace App.Business
   {
     public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
+      //service -> manager
       services.AddScoped<IAbilityService, AbilityManager>();
-      /*services.AddScoped<IUserService, UserService>();
-      services.AddScoped<IAuthService, JwtAuthService>();*/
-
+      //validator
+      services.AddScoped<IValidator<Ability>, AbilityValidator>();
       return services;
     }
   }

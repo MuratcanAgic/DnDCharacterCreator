@@ -1,11 +1,11 @@
 ﻿using App.Business.Abstract;
 using App.Business.Constants;
-using App.Business.ValidationRules.FluentValidation;
-using App.Core.Aspect.Autofac.Validation;
 using App.Core.Utilities.Business;
 using App.Core.Utilities.Results;
 using App.DataAccess.Abstract;
 using App.Entities.Concrete;
+using FluentValidation;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Concrete
@@ -13,24 +13,38 @@ namespace App.Business.Concrete
   public class AbilityManager : IAbilityService
   {
     IAbilityDal _abilityDal;
-
-    public AbilityManager(IAbilityDal abilityDal)
+    IValidator<Ability> _validator;
+    public AbilityManager(IAbilityDal abilityDal, IValidator<Ability> validator)
     {
       _abilityDal = abilityDal;
+      _validator = validator;
     }
 
-    [ValidationAspect(typeof(AbilityValidator))]
-    public IResult Add(Ability entity)
+    public ValidationResult Validate(Ability entity)
     {
+      return _validator.Validate(entity);
+    }
 
-      IResult result = BusinessRules.Run(); //this will run business rules defined in this classs
-
-      if (result != null)
+    public IDataResult<Ability> Add(Ability entity)
+    {
+      try
       {
-        return result;
+        //business result
+        IResult result = BusinessRules.Run(); //this will run business rules defined in this classs
+
+        if (result != null)
+        {
+          return new ErrorDataResult<Ability>(entity, result.Message);
+        }
+
+        _abilityDal.Add(entity);
+        return new SuccessDataResult<Ability>(entity, Messages.AbilityAdded);
       }
-      _abilityDal.Add(entity);
-      return new SuccessResult(Messages.AbilityAdded);
+      catch (Exception e)
+      {
+        return new ErrorDataResult<Ability>($"Ability couldn't be added! Error: {e.Message}");
+
+      }
     }
 
     public IDataResult<Task> AddAsync(Ability entity)
@@ -95,7 +109,16 @@ namespace App.Business.Concrete
 
     public IResult Save()
     {
-      _abilityDal.Save();
+      try
+      {
+        _abilityDal.Save();
+      }
+      catch (Exception e)
+      {
+
+        return new ErrorResult($"Ability couldn't be saved! Error: {e.Message}");
+      }
+
       return new SuccessResult("Ability Saved");
     }
 
@@ -108,5 +131,7 @@ namespace App.Business.Concrete
     {
       throw new NotImplementedException();
     }
+
+
   }
 }

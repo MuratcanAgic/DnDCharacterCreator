@@ -1,15 +1,17 @@
 ﻿using App.Core.Utilities.Results;
+using FluentValidation.Results;
 using System.Linq.Expressions;
 
 namespace App.Business.Abstract
 {
   public interface IGenericService<T> where T : class
   {
+    ValidationResult Validate(T entity);
     IDataResult<T> FindById(int id);
     IDataResult<T> Get(Expression<Func<T, bool>> filter, string includeProperties = "");
     IEnumerable<IDataResult<T>> GetList(Expression<Func<T, bool>> filter = null,
     Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
-    IResult Add(T entity);
+    IDataResult<T> Add(T entity);
     IResult Update(T entity);
     IResult Delete(T entity);
     IResult DeleteById(int id);
